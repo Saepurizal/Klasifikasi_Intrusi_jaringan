@@ -1,0 +1,354 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin - Blank Page</title>
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link href="{% static 'vendor/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="{% static 'css/sb-admin.css' %}" rel="stylesheet">
+</head>
+
+
+<body id="page-top">
+
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+        <a class="navbar-brand mr-1" href="{% url 'index' %}">RF-IDS</a>
+
+        <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="sidebar navbar-nav">
+            <!-- {% if user.is_authenticated %} -->
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+
+                    <i class="fas fa-user-alt"></i>
+                    <span> {{ user.username }}</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Deteksi Anomali</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'data' %}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Dataset</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'signout' %}" class="nav-link">
+                <i class="nav-icon fas fa-sign-out-alt"></i>
+                LogOut
+                </a>
+            </li>
+            <!-- {% endif %} -->
+        </ul>
+
+        <div id="content-wrapper">
+            <div class="container-fluid">
+                <!-- Page Content -->
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fas fa-table"></i>
+                        Update Data
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" class="post-form" action="/update/{{ data.id }}">
+                            {% csrf_token %}
+                    
+                            <div class="form-group">
+                                <label>ID:</label>
+                                <input type="text" class="form-control" name="id" id="id_id" required maxlength="20" value="{{ data.id }}" readonly/>
+                            </div>
+                    
+                            <div class="form-group">
+                                <label>Durasi Koneksi:</label>
+                                <input type="text" class="form-control" name="dur" id="id_dur" required maxlength="30" value="{{ data.dur }}"/>
+                            </div>
+                    
+                            <div class="form-group">
+                                <label>Protokol:</label>
+                                <input type="text" class="form-control" name="proto" id="id_proto" required maxlength="30" value="{{ data.proto }}"/>
+                            </div>
+                    
+                            <div class="form-group">
+                                <label>Layanan:</label>
+                                <input type="text" class="form-control" name="service" id="id_service" required maxlength="30" value="{{ data.service }}"/>
+                            </div>
+                    
+                            <div class="form-group">
+                                <label>Status:</label>
+                                <input type="text" class="form-control" name="state" id="id_state" required maxlength="30" value="{{ data.state }}"/>
+                            </div>
+                    
+                            <div class="form-group">
+                                <label>spkts:</label>
+                                <input type="text" class="form-control" name="spkts" id="id_spkts" required maxlength="30" value="{{ data.spkts }}"/>
+                            </div>
+                    
+                            <div class="form-group">
+                                <label>dpkts:</label>
+                                <input type="text" class="form-control" name="dpkts" id="id_dpkts" required maxlength="30" value="{{ data.dpkts }}"/>
+                            </div>
+                    
+                            <div class="form-group">
+                                <label>sbytes:</label>
+                                <input type="text" class="form-control" name="sbytes" id="id_sbytes" required maxlength="30" value="{{ data.sbytes }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>dbytes:</label>
+                                <input type="text" class="form-control" name="dbytes" id="id_dbytes" required maxlength="30" value="{{ data.dbytes }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>rate:</label>
+                                <input type="text" class="form-control" name="rate" id="id_rate" required maxlength="30" value="{{ data.rate }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>sttl:</label>
+                                <input type="text" class="form-control" name="sttl" id="id_sttl" required maxlength="30" value="{{ data.sttl }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>dttl:</label>
+                                <input type="text" class="form-control" name="dttl" id="id_dttl" required maxlength="30" value="{{ data.dttl }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>sload:</label>
+                                <input type="text" class="form-control" name="sload" id="id_sload" required maxlength="30" value="{{ data.sload }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>dload:</label>
+                                <input type="text" class="form-control" name="dload" id="id_dload" required maxlength="30" value="{{ data.dload }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>sloss:</label>
+                                <input type="text" class="form-control" name="sloss" id="id_sloss" required maxlength="30" value="{{ data.sloss }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>dloss:</label>
+                                <input type="text" class="form-control" name="dloss" id="id_dloss" required maxlength="30" value="{{ data.dloss }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>sinpkt:</label>
+                                <input type="text" class="form-control" name="sinpkt" id="id_sinpkt" required maxlength="30" value="{{ data.sinpkt }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>dinpkt:</label>
+                                <input type="text" class="form-control" name="dinpkt" id="id_dinpkt" required maxlength="30" value="{{ data.dinpkt }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>sjit:</label>
+                                <input type="text" class="form-control" name="sjit" id="id_sjit" required maxlength="30" value="{{ data.sjit }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>djit:</label>
+                                <input type="text" class="form-control" name="djit" id="id_djit" required maxlength="30" value="{{ data.djit }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>swin:</label>
+                                <input type="text" class="form-control" name="swin" id="id_swin" required maxlength="30" value="{{ data.swin }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>stcpb:</label>
+                                <input type="text" class="form-control" name="stcpb" id="id_stcpb" required maxlength="30" value="{{ data.stcpb }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>dtcpb:</label>
+                                <input type="text" class="form-control" name="dtcpb" id="id_dtcpb" required maxlength="30" value="{{ data.dtcpb }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>dwin:</label>
+                                <input type="text" class="form-control" name="dwin" id="id_dwin" required maxlength="30" value="{{ data.dwin }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>tcprtt:</label>
+                                <input type="text" class="form-control" name="tcprtt" id="id_tcprtt" required maxlength="30" value="{{ data.tcprtt }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>synack:</label>
+                                <input type="text" class="form-control" name="synack" id="id_synack" required maxlength="30" value="{{ data.synack }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>ackdat:</label>
+                                <input type="text" class="form-control" name="ackdat" id="id_ackdat" required maxlength="30" value="{{ data.ackdat }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>smean:</label>
+                                <input type="text" class="form-control" name="smean" id="id_smean" required maxlength="30" value="{{ data.smean }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>dmean:</label>
+                                <input type="text" class="form-control" name="dmean" id="id_dmean" required maxlength="30" value="{{ data.dmean }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>trans_depth:</label>
+                                <input type="text" class="form-control" name="trans_depth" id="id_trans_depth" required maxlength="30" value="{{ data.trans_depth }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>response_body_len:</label>
+                                <input type="text" class="form-control" name="response_body_len" id="id_response_body_len" required maxlength="30" value="{{ data.response_body_len }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>ct_srv_src:</label>
+                                <input type="text" class="form-control" name="ct_srv_src" id="id_ct_srv_src" required maxlength="30" value="{{ data.ct_srv_src }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>ct_state_ttl:</label>
+                                <input type="text" class="form-control" name="ct_state_ttl" id="id_ct_state_ttl" required maxlength="30" value="{{ data.ct_state_ttl }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>ct_dst_ltm:</label>
+                                <input type="text" class="form-control" name="ct_dst_ltm" id="id_ct_dst_ltm" required maxlength="30" value="{{ data.ct_dst_ltm }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>ct_src_dport_ltm:</label>
+                                <input type="text" class="form-control" name="ct_src_dport_ltm" id="id_ct_src_dport_ltm" required maxlength="30" value="{{ data.ct_src_dport_ltm }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>ct_dst_sport_ltm:</label>
+                                <input type="text" class="form-control" name="ct_dst_sport_ltm" id="id_ct_dst_sport_ltm" required maxlength="30" value="{{ data.ct_dst_sport_ltm }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>ct_dst_src_ltm:</label>
+                                <input type="text" class="form-control" name="ct_dst_src_ltm" id="id_ct_dst_src_ltm" required maxlength="30" value="{{ data.ct_dst_src_ltm }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>is_ftp_login:</label>
+                                <input type="text" class="form-control" name="is_ftp_login" id="id_is_ftp_login" required maxlength="30" value="{{ data.is_ftp_login }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>ct_ftp_cmd:</label>
+                                <input type="text" class="form-control" name="ct_ftp_cmd" id="id_ct_ftp_cmd" required maxlength="30" value="{{ data.ct_ftp_cmd }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>ct_flw_http_mthd:</label>
+                                <input type="text" class="form-control" name="ct_flw_http_mthd" id="id_ct_flw_http_mthd" required maxlength="30" value="{{ data.ct_flw_http_mthd }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>ct_src_ltm:</label>
+                                <input type="text" class="form-control" name="ct_src_ltm" id="id_ct_src_ltm" required maxlength="30" value="{{ data.ct_src_ltm }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>ct_srv_dst:</label>
+                                <input type="text" class="form-control" name="ct_srv_dst" id="id_ct_srv_dst" required maxlength="30" value="{{ data.ct_srv_dst }}"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>is_sm_ips_ports:</label>
+                                <input type="text" class="form-control" name="is_sm_ips_ports" id="id_is_sm_ips_ports" required maxlength="30" value="{{ data.is_sm_ips_ports }}"/>
+                            </div>
+                            
+                    
+                            <div class="form-group">
+                                <label>Jenis Serangan:</label>
+                                <input type="text" class="form-control" name="attack_cat" id="id_attack_cat" required maxlength="50" value="{{ data.attack_cat }}"/>
+                            </div>
+                    
+                            <div class="form-group">
+                                <label>Label:</label>
+                                <input type="text" class="form-control" name="label" id="id_label" required maxlength="30" value="{{ data.label }}"/>
+                            </div>
+                    
+                            <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-save"></i> Update</button>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <!-- Sticky Footer -->
+            <footer class="sticky-footer">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright © Dzikri & Saepurizal</span>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+        <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <!-- Page level plugin JavaScript-->
+    <script src="{% static 'vendor/datatables/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'vendor/datatables/dataTables.bootstrap4.js' %}"></script>
+    <script src="{% static 'js/js.cookie.min.js' %}"></script>
+
+
+    <!-- Demo scripts for this page-->
+    <!-- <script src="{% static 'js/demo/datatables-demo.js' %} "></script> -->
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'js/sb-admin.min.js' %}"></script>
+    <script>
+    
+    </script>
+</body>

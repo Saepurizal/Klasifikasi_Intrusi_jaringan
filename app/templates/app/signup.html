@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Register User</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css">
+    <style>
+        body {
+            font-family: "Open Sans", sans-serif;
+            background: linear-gradient(120deg,#2980b9, #8e44ad);
+        }
+        .login-page {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body class="login-page">
+    <div class="card" style="width:300px">
+        <div class="card-header text-center">Register</div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                <p>
+                    {{ field.label_tag }} <br>
+                    {{ field }}
+                    {% for error in field.errors %}
+                    <p style="color: red;">{{ error }}</p>
+                    {% endfor %}
+                </p>
+                {% endfor %}
+                <br>
+                <input type="submit" class="btn btn-primary floatright" value="Register" style="width:270px">
+            </form>
+        </div>
+        <div class="card-footer text-center">
+            Sudah Punya Akun?
+        <br><a href="{% url 'signin' %}">Sign In</a>
+        </div>
+    </div>
+</body>
+</html> 

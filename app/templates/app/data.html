@@ -1,0 +1,287 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin - Blank Page</title>
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link href="{% static 'vendor/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="{% static 'css/sb-admin.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"/>
+    
+</head>
+
+
+<body id="page-top">
+
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+        <a class="navbar-brand mr-1" href="{% url 'index' %}">RF-IDS</a>
+
+        <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="sidebar navbar-nav">
+            <!-- {% if user.is_authenticated %} -->
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+
+                    <i class="fas fa-user-alt"></i>
+                    <span> {{ user.username }}</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Deteksi Anomali</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'data' %}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Dataset</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'signout' %}" class="nav-link">
+                <i class="nav-icon fas fa-sign-out-alt"></i>
+                LogOut
+                </a>
+            </li>
+            <!-- {% endif %} -->
+        </ul>
+
+        <div id="content-wrapper">
+            <div class="container-fluid">
+                <!-- Page Content -->
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fas fa-table"></i>
+                        Dataset
+                        <span><a href="/addnew" class="btn btn-primary btn-sm" >Tambah Data</a></span>
+                        <!-- <span><a href="/upload_csv" class="btn btn-success btn-sm" >Unggah CSV</a></span> -->
+                        
+                        <form method="post" enctype="multipart/form-data" action="{% url 'process_csv' %}">
+                            {% csrf_token %}
+                            <br>
+                            <label for="csv_file">Upload CSV File:</label>
+                            <input type="file" name="csv_file" id="csv_file" accept=".csv">
+                            <br>
+                            <button type="submit" class="btn btn-primary btn-sm">Unggah</button>
+                        </form>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>ID</th>
+                                        <th>Dur</th>
+                                        <th>Proto</th>
+                                        <th>Service</th>
+                                        <th>State</th>
+                                        <th>Spkts</th>
+                                        <th>Dpkts</th>
+                                        <th>Sbytes</th>
+                                        <th>Dbytes</th>
+                                        <th>Rate</th>
+                                        <th>Sttl</th>
+                                        <th>Dttl</th>
+                                        <th>Sload</th>
+                                        <th>Dload</th>
+                                        <th>Sloss</th>
+                                        <th>Dloss</th>
+                                        <th>Sinpkt</th>
+                                        <th>Dinpkt</th>
+                                        <th>Sjit</th>
+                                        <th>Djit</th>
+                                        <th>Swin</th>
+                                        <th>Stcpb</th>
+                                        <th>Dtcpb</th>
+                                        <th>Dwin</th>
+                                        <th>Tcprtt</th>
+                                        <th>Synack</th>
+                                        <th>Ackdat</th>
+                                        <th>Smean</th>
+                                        <th>Dmean</th>
+                                        <th>Trans Depth</th>
+                                        <th>Response Body Len</th>
+                                        <th>Ct Srv Src</th>
+                                        <th>Ct State Ttl</th>
+                                        <th>Ct Dst Ltm</th>
+                                        <th>Ct Src Dport Ltm</th>
+                                        <th>Ct Dst Sport Ltm</th>
+                                        <th>Ct Dst Src Ltm</th>
+                                        <th>Is Ftp Login</th>
+                                        <th>Ct Ftp Cmd</th>
+                                        <th>Ct Flw Http Mthd</th>
+                                        <th>Ct Src Ltm</th>
+                                        <th>Ct Srv Dst</th>
+                                        <th>Is Sm Ips Ports</th>
+                                        <th>Attack Cat</th>
+                                        <th>Label</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for data in datas %}
+                                    <tr class="text-center">
+                                        <td>{{ data.id }}</td>
+                                        <td>{{ data.dur }}</td>
+                                        <td>{{ data.proto }}</td>
+                                        <td>{{ data.service }}</td>
+                                        <td>{{ data.state }}</td>
+                                        <td>{{ data.spkts }}</td>
+                                        <td>{{ data.dpkts }}</td>
+                                        <td>{{ data.sbytes }}</td>
+                                        <td>{{ data.dbytes }}</td>
+                                        <td>{{ data.rate }}</td>
+                                        <td>{{ data.sttl }}</td>
+                                        <td>{{ data.dttl }}</td>
+                                        <td>{{ data.sload }}</td>
+                                        <td>{{ data.dload }}</td>
+                                        <td>{{ data.sloss }}</td>
+                                        <td>{{ data.dloss }}</td>
+                                        <td>{{ data.sinpkt }}</td>
+                                        <td>{{ data.dinpkt }}</td>
+                                        <td>{{ data.sjit }}</td>
+                                        <td>{{ data.djit }}</td>
+                                        <td>{{ data.swin }}</td>
+                                        <td>{{ data.stcpb }}</td>
+                                        <td>{{ data.dtcpb }}</td>
+                                        <td>{{ data.dwin }}</td>
+                                        <td>{{ data.tcprtt }}</td>
+                                        <td>{{ data.synack }}</td>
+                                        <td>{{ data.ackdat }}</td>
+                                        <td>{{ data.smean }}</td>
+                                        <td>{{ data.dmean }}</td>
+                                        <td>{{ data.trans_depth }}</td>
+                                        <td>{{ data.response_body_len }}</td>
+                                        <td>{{ data.ct_srv_src }}</td>
+                                        <td>{{ data.ct_state_ttl }}</td>
+                                        <td>{{ data.ct_dst_ltm }}</td>
+                                        <td>{{ data.ct_src_dport_ltm }}</td>
+                                        <td>{{ data.ct_dst_sport_ltm }}</td>
+                                        <td>{{ data.ct_dst_src_ltm }}</td>
+                                        <td>{{ data.is_ftp_login }}</td>
+                                        <td>{{ data.ct_ftp_cmd }}</td>
+                                        <td>{{ data.ct_flw_http_mthd }}</td>
+                                        <td>{{ data.ct_src_ltm }}</td>
+                                        <td>{{ data.ct_srv_dst }}</td>
+                                        <td>{{ data.is_sm_ips_ports }}</td>
+                                        <td>{{ data.attack_cat }}</td>
+                                        <td>{{ data.label }}</td>
+                                        <td>
+                                            <a href="/edit/{{ data.id }}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
+                                            <a href="/delete/{{ data.id }}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda Yakin Menghapus Data Ini?')"><i class="fas fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                                
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="pagination justify-content-start">
+                                    {% if datas.has_previous %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page=1">First</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ datas.previous_page_number }}">Previous</a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="pagination justify-content-end">
+                                    {% if datas.has_next %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ datas.next_page_number }}">Next</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ datas.paginator.num_pages }}">Last</a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> -->
+                </div>
+
+
+            </div>
+            <!-- /.container-fluid -->
+
+            <!-- Sticky Footer -->
+            <footer class="sticky-footer">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright © Dzikri & Saepurizal</span>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+        <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <!-- Page level plugin JavaScript-->
+    <script src="{% static 'vendor/datatables/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'vendor/datatables/dataTables.bootstrap4.js' %}"></script>
+    <script src="{% static 'js/js.cookie.min.js' %}"></script>
+
+
+    <!-- Demo scripts for this page-->
+    <!-- <script src="{% static 'js/demo/datatables-demo.js' %} "></script> -->
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'js/sb-admin.min.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable({
+                "aLengthMenu" : [[3, 5, 10, 25, -1], [3, 5, 10, 25, "All"]],
+                "iDisplayLength" : 3
+                }
+            );
+        } );
+    </script>
+</body>

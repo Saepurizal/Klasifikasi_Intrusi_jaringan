@@ -1,0 +1,348 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin - Blank Page</title>
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link href="{% static 'vendor/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="{% static 'css/sb-admin.css' %}" rel="stylesheet">
+</head>
+
+
+<body id="page-top">
+
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+        <a class="navbar-brand mr-1" href="{% url 'index' %}">RF-IDS</a>
+
+        <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="sidebar navbar-nav">
+            <!-- {% if user.is_authenticated %} -->
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+
+                    <i class="fas fa-user-alt"></i>
+                    <span> {{ user.username }}</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Deteksi Anomali</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'data' %}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Dataset</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'signout' %}" class="nav-link">
+                <i class="nav-icon fas fa-sign-out-alt"></i>
+                LogOut
+                </a>
+            </li>
+            <!-- {% endif %} -->
+        </ul>
+
+        <div id="content-wrapper">
+            <div class="container-fluid">
+                <!-- Page Content -->
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fas fa-table"></i>
+                        Tambah Data
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" class="post-form" action="/addnew/">
+                            {% csrf_token %}
+                            
+                            <div class="form-group">
+                                <label>Durasi Koneksi:</label>
+                                {{ form.dur }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Protokol:</label>
+                                {{ form.proto }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Layanan:</label>
+                                {{ form.service }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Status:</label>
+                                {{ form.state }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Paket Source:</label>
+                                {{ form.spkts }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Paket Destination:</label>
+                                {{ form.dpkts }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Bytes Source:</label>
+                                {{ form.sbytes }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Bytes Destination:</label>
+                                {{ form.dbytes }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Rate:</label>
+                                {{ form.rate }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Source TTL:</label>
+                                {{ form.sttl }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Destination TTL:</label>
+                                {{ form.dttl }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>SLoad:</label>
+                                {{ form.sload }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>DLoad:</label>
+                                {{ form.dload }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>SLoss:</label>
+                                {{ form.sloss }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>DLoss:</label>
+                                {{ form.dloss }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Sinpkt:</label>
+                                {{ form.sinpkt }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Dinpkt:</label>
+                                {{ form.dinpkt }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Sjit:</label>
+                                {{ form.sjit }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Djit:</label>
+                                {{ form.djit }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Swing:</label>
+                                {{ form.swin }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>STCPB:</label>
+                                {{ form.stcpb }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>DTCBP:</label>
+                                {{ form.dtcpb }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>DWin:</label>
+                                {{ form.dwin }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>TCPRtt:</label>
+                                {{ form.tcprtt }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Synack:</label>
+                                {{ form.synack }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Ackdat:</label>
+                                {{ form.ackdat }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Smean:</label>
+                                {{ form.smean }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Dmean:</label>
+                                {{ form.dmean }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Trans Depth:</label>
+                                {{ form.trans_depth }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Response Body Length:</label>
+                                {{ form.response_body_len }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>CT_SRV_SRC:</label>
+                                {{ form.ct_srv_src }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>CT_State_TTL:</label>
+                                {{ form.ct_state_ttl }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>CT_DST_LTM:</label>
+                                {{ form.ct_dst_ltm }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>CT_SRC_DPORT_LTM:</label>
+                                {{ form.ct_src_dport_ltm }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>CT_DST_SPORT_LTM:</label>
+                                {{ form.ct_dst_sport_ltm }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>CT_DST_SRC_LTM:</label>
+                                {{ form.ct_dst_src_ltm }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Is FTP Login:</label>
+                                {{ form.is_ftp_login }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>CT_FTP_CMD:</label>
+                                {{ form.ct_ftp_cmd }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>CT_FLW_HTTP_MTHD:</label>
+                                {{ form.ct_flw_http_mthd }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>CT_SRC_LTM:</label>
+                                {{ form.ct_src_ltm }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>CT_SRV_DST:</label>
+                                {{ form.ct_srv_dst }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Is SM IPS Ports:</label>
+                                {{ form.is_sm_ips_ports }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Jenis Serangan:</label>
+                                {{ form.attack_cat }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Label:</label>
+                                {{ form.label }}
+                            </div>
+                    
+                            <!-- Tambahkan tombol untuk mengirimkan formulir -->
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
+                    </div>                    
+                </div>
+            </div>
+
+            <!-- Sticky Footer -->
+            <footer class="sticky-footer">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright © Dzikri & Saepurizal</span>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+        <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <!-- Page level plugin JavaScript-->
+    <script src="{% static 'vendor/datatables/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'vendor/datatables/dataTables.bootstrap4.js' %}"></script>
+    <script src="{% static 'js/js.cookie.min.js' %}"></script>
+
+
+    <!-- Demo scripts for this page-->
+    <!-- <script src="{% static 'js/demo/datatables-demo.js' %} "></script> -->
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'js/sb-admin.min.js' %}"></script>
+    <script>
+    
+    </script>
+</body>
